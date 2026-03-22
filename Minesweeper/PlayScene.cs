@@ -4,7 +4,7 @@ using Framework.Engine;
 
 namespace Framework.Minesweeper
 {
-    // ── 셀 상태 ──────────────────────────────────────────────────────────
+    //  셀 상태 
     public enum CellState { Hidden, Revealed, Flagged, Question }
 
     public class Cell
@@ -14,12 +14,12 @@ namespace Framework.Minesweeper
         public CellState State = CellState.Hidden;
     }
 
-    // ── PlayScene ─────────────────────────────────────────────────────────
+    //  PlayScene 
     public class PlayScene : Scene
     {
         public event GameAction PlayAgainRequested;
 
-        // ── 게임 설정 ─────────────────────────────────────────────────────
+        //  게임 설정 
         private readonly GameConfig _config;
         private Cell[,] _board;          // [row, col]
         private bool _firstClick;
@@ -30,11 +30,11 @@ namespace Framework.Minesweeper
         private float _timer;
         private bool _timerRunning;
 
-        // ── 커서 (키보드 이동용) ──────────────────────────────────────────
+        //  커서 (키보드 이동용) 
         private int _cursorCol;
         private int _cursorRow;
 
-        // ── 화면 레이아웃 ─────────────────────────────────────────────────
+        //  화면 레이아웃 
         // 보드 시작 위치 (콘솔 기준)
         private int _boardOriginX;
         private int _boardOriginY;
@@ -48,7 +48,7 @@ namespace Framework.Minesweeper
             _config = config;
         }
 
-        // ── 생명주기 ──────────────────────────────────────────────────────
+        //  생명주기 
         public override void Load()
         {
             InitBoard();
@@ -58,7 +58,7 @@ namespace Framework.Minesweeper
             int boardPixelH = _config.Rows * CellH;
             _boardOriginX = (MinesweeperApp.ScreenWidth - boardPixelW) / 2;
             _boardOriginY = (MinesweeperApp.ScreenHeight - boardPixelH) / 2 + 1; // +1: 헤더 공간
-            // 최소 Y = 3 (헤더)
+            // 최소 Y = 3 (헤더) 보드가 너무 커서 계산결과가 헤더랑 겹칠 수 있어서 막음
             if (_boardOriginY < 3) _boardOriginY = 3;
 
             _cursorCol = _config.Cols / 2;
@@ -83,7 +83,7 @@ namespace Framework.Minesweeper
 
         public override void Unload() { }
 
-        // ── Update ────────────────────────────────────────────────────────
+        //  Update 
         public override void Update(float deltaTime)
         {
             if (_timerRunning && !_gameOver && !_victory)

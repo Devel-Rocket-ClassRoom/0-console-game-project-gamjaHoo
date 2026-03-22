@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Framework.Engine
 {
-    // ── 마우스 이벤트 데이터 ──────────────────────────────────────────────
+    //  마우스 이벤트 데이터 
     public struct MouseState
     {
         public int X;           // 콘솔 열(column)
@@ -19,7 +19,7 @@ namespace Framework.Engine
 
     public static class Input
     {
-        // ── P/Invoke ─────────────────────────────────────────────────────
+        //  P/Invoke 
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(int vKey);
 
@@ -72,7 +72,7 @@ namespace Framework.Engine
             public uint dwEventFlags;
         }
 
-        // ── 키보드 상태 ───────────────────────────────────────────────────
+        //  키보드 상태 
         private static readonly HashSet<ConsoleKey> s_currentKeys = new();
         private static readonly HashSet<ConsoleKey> s_previousKeys = new();
 
@@ -91,7 +91,7 @@ namespace Framework.Engine
             ConsoleKey.W, ConsoleKey.A, ConsoleKey.D, ConsoleKey.F,
         };
 
-        // ── 마우스 상태 ───────────────────────────────────────────────────
+        //  마우스 상태 
         private static int s_mouseX;
         private static int s_mouseY;
         private static bool s_leftHeld;
@@ -105,7 +105,7 @@ namespace Framework.Engine
         public static MouseState Mouse { get; private set; }
         public static bool HasInput => s_currentKeys.Count > 0;
 
-        // ── 초기화 ────────────────────────────────────────────────────────
+        //  초기화 
         public static void EnableMouse()
         {
             try
@@ -127,7 +127,7 @@ namespace Framework.Engine
             }
         }
 
-        // ── Poll (매 프레임 엔진이 호출) ──────────────────────────────────
+        //  Poll (매 프레임 엔진이 호출) 
         public static void Poll()
         {
             // 키보드
@@ -198,7 +198,7 @@ namespace Framework.Engine
             }
         }
 
-        // ── 키보드 API ────────────────────────────────────────────────────
+        //  키보드 API 
         public static bool IsKey(ConsoleKey key) => s_currentKeys.Contains(key);
         public static bool IsKeyDown(ConsoleKey key) => s_currentKeys.Contains(key) && !s_previousKeys.Contains(key);
         public static bool IsKeyUp(ConsoleKey key) => !s_currentKeys.Contains(key) && s_previousKeys.Contains(key);

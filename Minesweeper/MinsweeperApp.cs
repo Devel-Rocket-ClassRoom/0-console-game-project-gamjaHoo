@@ -5,7 +5,6 @@ namespace Framework.Minesweeper
 {
     public class MinesweeperApp : GameApp
     {
-        // 화면: 80x25
         public const int ScreenWidth = 100;
         public const int ScreenHeight = 30;
 
@@ -39,7 +38,7 @@ namespace Framework.Minesweeper
             _scenes.CurrentScene?.Draw(Buffer);
         }
 
-        // ── 씬 전환 ──────────────────────────────────────────────────────
+        //  씬 전환 
 
         private void ChangeToTitle()
         {
